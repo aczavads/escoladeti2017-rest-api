@@ -1,20 +1,13 @@
 package br.unicesumar.grupoUsuario;
 
-import com.fasterxml.jackson.annotation.JsonCreator;
-import com.fasterxml.jackson.annotation.JsonProperty;
 
 public class GrupoUsuarioDTO {
 	private String id;
 	private String nome;
 
-	public GrupoUsuarioDTO() {
-		// TODO Auto-generated constructor stub
-	}
-
-	@JsonCreator
 	public GrupoUsuarioDTO(
-			@JsonProperty("id") String id, 
-			@JsonProperty("nome") String nome) {
+			String id, 
+			String nome) {
 		super();
 		this.id = id;
 		this.nome = nome;

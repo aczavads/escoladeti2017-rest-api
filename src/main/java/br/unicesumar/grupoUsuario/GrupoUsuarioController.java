@@ -1,8 +1,6 @@
 package br.unicesumar.grupoUsuario;
 
 import java.util.List;
-import java.util.Map;
-import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -21,31 +19,26 @@ import br.unicesumar.usuarioPersistente.UsuarioRepository;
 @RestController
 @RequestMapping("/grupos")
 public class GrupoUsuarioController {
+	
 	@Autowired
 	private GrupoUsuarioRepository repo;
+	
 	@Autowired
 	private UsuarioRepository repoUsuario;
 	
+	@Autowired
+	private GrupoUsuarioService service;
+	
 	@GetMapping
-	public List<GrupoUsuario> getGruposUsuarios() {
-		//return repo.selectGrupoSimples();
-		return repo.findAll();
+	public List<GrupoUsuarioDTO> getGruposUsuarios() {
+		return service.selectGrupoSimples();
 	}
 
 	@PostMapping("/usuarios")
-	public ResponseEntity postUsuario(@RequestBody AdicionarUsuarioAoGrupo comando) {
+	public ResponseEntity<?> postUsuario(@RequestBody AdicionarUsuarioAoGrupo comando) {
 		
 		GrupoUsuario grupo = this.repo.findOne(comando.idDoGrupo);
 		grupo.vincular(repoUsuario.findOne(comando.idDoUsuario));
-		repo.save(grupo);
-		
-		return ResponseEntity.ok().build();
-	}
-	@DeleteMapping("/usuarios")
-	public ResponseEntity deleteUsuario(@RequestBody RemoverUsuarioDoGrupo comando) {
-		
-		GrupoUsuario grupo = this.repo.findOne(comando.idDoGrupo);
-		grupo.remover(repoUsuario.findOne(comando.idDoUsuario));
 		repo.save(grupo);
 		
 		return ResponseEntity.ok().build();
@@ -68,7 +61,7 @@ public class GrupoUsuarioController {
 	}
 	
 	@DeleteMapping("/{id}")
-	public ResponseEntity deleteGrupoUsuario(@PathVariable String id) {
+	public ResponseEntity<?> deleteGrupoUsuario(@PathVariable String id) {
 		if (id.equals("xxx")) {
 			return ResponseEntity.notFound().build();
 		}

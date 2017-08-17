@@ -13,6 +13,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import br.unicesumar.grupoUsuario.commands.AdicionarUsuarioAoGrupo;
+import br.unicesumar.grupoUsuario.dtos.GrupoUsuarioDTO;
 import br.unicesumar.usuarioPersistente.UsuarioRepository;
 
 
@@ -31,7 +33,8 @@ public class GrupoUsuarioController {
 	
 	@GetMapping
 	public List<GrupoUsuarioDTO> getGruposUsuarios() {
-		return service.selectGrupoSimples();
+		//return service.selectGrupoSimples();
+		return repo.selectGrupoSimples();
 	}
 
 	@PostMapping("/usuarios")

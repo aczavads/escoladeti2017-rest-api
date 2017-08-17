@@ -9,6 +9,8 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Service;
 
+import br.unicesumar.grupoUsuario.dtos.GrupoUsuarioDTO;
+
 @Service
 public class GrupoUsuarioService {
 	
@@ -25,8 +27,8 @@ public class GrupoUsuarioService {
 			@Override
 			public GrupoUsuarioDTO mapRow(ResultSet rs, int rowNum)
 					throws SQLException {
-				String id = rs.getString(1);
-				String nome = rs.getString(2);
+				String id = rs.getString("id");
+				String nome = rs.getString("nome");
 				
 				return new GrupoUsuarioDTO(id, nome);
 			}

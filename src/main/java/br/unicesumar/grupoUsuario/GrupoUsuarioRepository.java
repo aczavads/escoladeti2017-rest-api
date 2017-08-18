@@ -10,7 +10,7 @@ import br.unicesumar.grupoUsuario.dtos.GrupoUsuarioDTO;
 
 public interface GrupoUsuarioRepository extends JpaRepository<GrupoUsuario, String>{
 	
-	@Query(value="select new br.unicesumar.grupoUsuario.dtos.GrupoUsuarioDTO(u.id, u.nome) from GrupoUsuario g inner join g.usuarios u")
+	@Query(value="select new br.unicesumar.grupoUsuario.dtos.GrupoUsuarioDTO(g.id, g.nome) from GrupoUsuario g ")
 	List<GrupoUsuarioDTO> selectGrupoSimples();
 
 }
